@@ -1,0 +1,42 @@
+<div class="container">
+    <form class="row g-3" [formGroup]="DepartmentForm" (ngSubmit)="onSubmit()">
+      <div class="col-md-6">
+        <label for="inputename" class="form-label">Department Name</label>
+        <input type="text" class="form-control" formControlName="dname" />
+      </div>
+   
+  
+      <div class="col-md-6">
+        <label for="inputmanger Id" class="form-label">Manager ID</label>
+        <select class="form-control" formControlName="mgrid">
+          <option *ngFor="let mgrs of mgr" value="{{ mgrs.mgrid }}">
+            {{ mgrs.ename }}
+          </option>
+        </select>
+      </div>
+  
+  
+      <div class="col-md-6">
+        <label for="inputDepartment ID " class="form-label">Location ID </label>
+        <select class="form-control" formControlName="locationid">
+          <option
+            *ngFor="let locations of location"
+            value="{{ locations.location_id }}"
+          >
+            {{ locations.state }}
+          </option>
+        </select>
+      </div>
+  
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck" />
+          <label class="form-check-label" for="gridCheck"> Check me out </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  

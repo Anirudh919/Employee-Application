@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div *ngIf="Data" class="alert alert-danger" role="alert">
+        {{Data}}
+      </div>
+      <div class="card px-5 py-5" id="form1">
+        <form class="form-data" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <div class="forms-inputs mb-4">
+            <span>Email or username</span>
+            <input class="col-12" type="text" name="username" required ngModel />
+          </div>
+          <div class="forms-inputs mb-4">
+            <span>Password</span>
+            <input class="col-12" type="password" name="password" required ngModel />
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-dark w-100">Login</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
