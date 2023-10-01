@@ -32,37 +32,36 @@ let rootdb = {};
 //   });
 // };
 
-rootdb.login = (username,password) => {
+rootdb.login = (username, password) => {
   return new Promise((resolve, reject) => {
-  console.log(username,password);
-  pool.query(
-    `select * from user where username=? and password=?`,
-    [username,password],
-    (err, result) => {
-      if (err) {
-        return reject(err);
-        console.log(err);
-      }else if(!result.length){
-  // console.log("your data does not match",result);
+    console.log(username, password);
     pool.query(
-      `select * from user where username=? `,
-      [username],
+      `select * from user where username=? and password=?`,
+      [username, password],
       (err, result) => {
         if (err) {
-
-          return reject({status:0,data:[""]});
-        } 
-         console.log("password does not match");
-          return resolve({status:0,data:"Incorrect_password"})
+          return reject(err);
+          console.log(err);
+        } else if (!result.length) {
+          // console.log("your data does not match",result);
+          pool.query(
+            `select * from user where username=? `,
+            [username],
+            (err, result) => {
+              if (err) {
+                return reject({ status: 0, data: [""] });
+              }
+              console.log("password does not match");
+              return resolve({ status: 0, data: "Incorrect_password" });
+            }
+          );
+          return resolve({ status: 0, data: "Not_register" });
+        } else {
+          let token = jwt.sign({ data: result }, "secret");
+          return resolve({ status: 1, data: result, token: token });
+          console.log("you successfully login", result);
         }
-   ); 
-   return resolve({status:0,data:"Not_register"})
-  }
-  else{
-    let token = jwt.sign({ data: result }, "secret");
-    return resolve({ status: 1, data: result, token: token });
-    console.log("you successfully login",result);
-  }}
+      }
     );
   });
 };
@@ -115,16 +114,31 @@ inner join  jobs j on e.jobid=j.job_id;`,
   });
 };
 
-rootdb.employeegetid=(id)=>{
-  return new Promise((resolve,reject)=>{
-    pool.query(`select * from employee where empid=?`,[id],(err,result)=>{
-      if(err){
+rootdb.employeegetid = (id) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select * from employee where empid=?`, [id], (err, result) => {
+      if (err) {
         return reject(err);
       }
       return resolve(result);
-    })
-  })
-}
+    });
+  });
+};
+
+rootdb.employeegetName = (name) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `select * from employee where ename=?`,
+      [name],
+      (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(result);
+      }
+    );
+  });
+};
 
 rootdb.departmentdetails = () => {
   return new Promise((resolve, reject) => {
@@ -150,13 +164,17 @@ rootdb.jobdetails = (id) => {
 
 rootdb.Locationdetails = (id) => {
   return new Promise((resolve, reject) => {
-    pool.query(`
-    select l.location_id,l.street_address,l.city,l.state,c.country_name from departments d inner join location l on d.locationid=l.location_id inner join countries c on l.country_id=c.country_id; `, [id], (err, result) => {
-      if (err) {
-        return reject(err);
+    pool.query(
+      `
+    select l.location_id,l.street_address,l.city,l.state,c.country_name from departments d inner join location l on d.locationid=l.location_id inner join countries c on l.country_id=c.country_id; `,
+      [id],
+      (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(result);
       }
-      return resolve(result);
-    });
+    );
   });
 };
 
@@ -225,13 +243,7 @@ rootdb.AddDepartment = (input) => {
   return new Promise((resolve, reject) => {
     pool.query(
       sql,
-      [
-        input.deptid,
-        input.dname,
-        input.mgrid,
-        input.locationid,
-       
-      ],
+      [input.deptid, input.dname, input.mgrid, input.locationid],
       (err) => {
         if (err) {
           return reject(err);

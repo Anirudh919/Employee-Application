@@ -19,16 +19,15 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: 'employees', component: ViewAllEmployeeComponent },
-  { path: 'employee/edit/:id', component: UpdateEmployeeComponent },
-    
+      { path: 'employee/edit/:id', component: UpdateEmployeeComponent },
       { path: 'add-employee', component: AddEmployeeComponent },
       { path: 'department-list', component: ViewAllDepartmentComponent },
       { path: 'add-department', component: AddDepartmentComponent },
       { path: 'update-department/:id', component: UpdateDepartmentComponent },
     ],
-    
+
   },
-  // { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
@@ -37,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

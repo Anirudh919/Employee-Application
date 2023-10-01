@@ -12,7 +12,7 @@ import { catchError, map, Observable, pipe, throwError } from 'rxjs';
 export class ApiService {
   baseUri: string = 'http://localhost:3000/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   Login(url: any, payload: any) {
     return this.http.post(`${this.baseUri}${url}`, payload).pipe(
@@ -57,7 +57,7 @@ export class ApiService {
     return this.http.get(`${this.baseUri}/departmentdetail`);
   }
 
-  LocationDetail(){
+  LocationDetail() {
     return this.http.get(`${this.baseUri}/locationdetail`);
   }
 
@@ -89,16 +89,23 @@ export class ApiService {
     let url = `${this.baseUri}/employee/${id}`;
     return this.http
       .get(url, { headers: this.headers })
-      .pipe(map((res:any)=>{
+      .pipe(map((res: any) => {
         return res[0] || {};
       }),
-      catchError(this.errorMgmt));
+        catchError(this.errorMgmt));
+  }
+
+  GetdetaildemployeeName(name: any): Observable<any> {
+    let url = `${this.baseUri}/employeename/${name}`;
+    console.log(url)
+    return this.http.get(url)
+
   }
 
 
-  AddDepartment(data:any): Observable<any>{
-    let url=`${this.baseUri}/departmentadd`;
-    return this.http.post(url,data).pipe(catchError(this.errorMgmt));
+  AddDepartment(data: any): Observable<any> {
+    let url = `${this.baseUri}/departmentadd`;
+    return this.http.post(url, data).pipe(catchError(this.errorMgmt));
   }
 
 

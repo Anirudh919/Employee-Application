@@ -20,7 +20,13 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets",
+              {
+                "glob": "*.svg",
+                "input": "./node_modules/bootstrap-icons/",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.css",
@@ -79,6 +85,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "Employee-Application:build"
+            
           }
         },
         "test": {
@@ -104,4 +111,5 @@
   "cli": {
     "analytics": "b0bd12b4-2230-4909-a4aa-2cac2c0f929a"
   }
+  
 }

@@ -126,6 +126,16 @@ router.post("/departmentadd", async (req, res) => {
 router.get("/employee/:id", async (req, res) => {
   try {
     let result = await db.employeegetid(req.params.id);
+    console.log(result);
+    res.json(result);
+  } catch (err) {
+    res.sendStatus(500);
+  }
+});
+
+router.get("/employeename/:name", async (req, res) => {
+  try {
+    let result = await db.employeegetName(req.params.name);
     res.json(result);
   } catch (err) {
     res.sendStatus(500);

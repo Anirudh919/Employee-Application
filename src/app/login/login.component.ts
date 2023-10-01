@@ -11,12 +11,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   isLogin: boolean = false;
-  Data:any;
+  Data: any;
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
     private _router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isUserLogin();
@@ -29,18 +29,17 @@ export class LoginComponent implements OnInit {
         this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
         this._auth.setDataInLocalStorage('token', res.token);
         this._router.navigate(['']);
-      } else if(res.data){
-        this.Data=res.data;
-        if(res.data==res.data[0])
-{
-  console.log("hiii")
-}else if(res.data=="Incorrect_password")     {
-  this.Data=res.data;
-}else if(res.data=="Not_register")     {
-  this.Data=res.data;
-}
-   console.log(this.Data);
-      }else {
+      } else if (res.data) {
+        this.Data = res.data;
+        if (res.data == res.data[0]) {
+          console.log("hiii")
+        } else if (res.data == "Incorrect_password") {
+          this.Data = res.data;
+        } else if (res.data == "Not_register") {
+          this.Data = res.data;
+        }
+        console.log(this.Data);
+      } else {
         this._router.navigate(['register']);
       }
     });

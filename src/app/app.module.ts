@@ -15,6 +15,7 @@ import { ViewAllDepartmentComponent } from './component/Department/view-all-depa
 import { UpdateDepartmentComponent } from './component/Department/update-department/update-department.component';
 import { AddDepartmentComponent } from './component/Department/add-department/add-department.component';
 import { DatePipe } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
