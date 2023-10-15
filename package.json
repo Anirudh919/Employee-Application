@@ -21,6 +21,7 @@
     "@angular/router": "^14.1.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.11.1",
+    "chart.js": "^4.4.0",
     "cors": "^2.8.5",
     "init": "^0.1.2",
     "jsonwebtoken": "^9.0.0",
