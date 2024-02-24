@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 
 const pool = mysql.createPool({
@@ -101,7 +101,7 @@ rootdb.register = (input) => {
 rootdb.employeedetails = () => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `select e.empid,e.ename as ename,j.job_title,b.ename ,e.hiredate,e.salary,e.comission,d.dname from 
+      `select e.empid,e.ename as ename,j.job_title,b.ename as mname,e.hiredate,e.salary,e.comission,d.dname from 
 employee e left join employee b on e.mgrid=b.empid inner join departments d on e.deptid=d.deptid
 inner join  jobs j on e.jobid=j.job_id;`,
       (err, result) => {

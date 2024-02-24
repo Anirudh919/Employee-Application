@@ -7,7 +7,7 @@ const cors = require("cors");
 app.use(
   bodyparser.urlencoded({
     extended: false,
-  })
+  }) 
 );
 app.use(cors());
 app.use(express.json());

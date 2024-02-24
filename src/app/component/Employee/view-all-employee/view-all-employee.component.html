@@ -31,7 +31,7 @@
         <th scope="col">Employee ID</th>
         <th scope="col">Employee Name</th>
         <th scope="col">Job ID</th>
-        <th scope="col">Manager ID</th>
+        <th scope="col">Manager Name</th>
         <th scope="col">Hiredate</th>
         <th scope="col">Salary</th>
         <th scope="col">comission</th>
@@ -49,7 +49,7 @@
         <td>{{ employee.empid }}</td>
         <td>{{ employee.ename }}</td>
         <td>{{ employee.job_title }}</td>
-        <td>{{ employee.mgrid }}</td>
+        <td>{{ employee.mname }}</td>
         <td>{{ employee.hiredate | date }}</td>
         <td>&#x20b9; {{ employee.salary }}</td>
         <td>{{ employee.comission ? "&#x20b9;" + employee.comission : "" }}</td>
